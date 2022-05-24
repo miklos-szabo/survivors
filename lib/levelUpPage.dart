@@ -13,12 +13,21 @@ Widget LevelUpBuilder(BuildContext buildContext, SurvivorsGame game) {
           ElevatedButton(
               onPressed: (){ game.increaseDamage(); game.closeLevelUpScreen();},
               child: const Text("Damage +20%")),
+          Container(
+            height: 10,
+          ),
           ElevatedButton(
               onPressed: (){ game.increaseFireRate(); game.closeLevelUpScreen();},
               child: const Text("Fire rate +20%")),
+          Container(
+            height: 10,
+          ),
           ElevatedButton(
               onPressed: (){ game.increaseMoveSpeed(); game.closeLevelUpScreen();},
               child: const Text("Move speed +20%")),
+          Container(
+            height: 10,
+          ),
           ElevatedButton(
               onPressed: (){ game.increaseProjectileSpeed(); game.closeLevelUpScreen();},
               child: const Text("Projectile speed +20%"))

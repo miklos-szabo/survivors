@@ -5,6 +5,8 @@ import 'dart:ui';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/game.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hw_survivors/game/bullet.dart';
 import 'package:hw_survivors/main.dart';
@@ -14,7 +16,7 @@ import 'enemy.dart';
 
 class Player extends SpriteComponent with HasGameRef<SurvivorsGame>, CollisionCallbacks, KeyboardHandler  {
   static const double speed = 150;
-  final Vector2 playerVelocity = Vector2.zero();
+  Vector2 playerVelocity = Vector2.zero();
   Vector2 shootingDirection = Vector2(-1, 0);
   double shotDelay = 0.5;
   int xp = 0;
@@ -26,6 +28,8 @@ class Player extends SpriteComponent with HasGameRef<SurvivorsGame>, CollisionCa
   double fireRateModifier = 1;
 
   late Timer interval;
+  late final JoystickComponent moveJoystick;
+  late final JoystickComponent fireJoystick;
 
   @override
   Future<void> onLoad() async {
@@ -45,6 +49,21 @@ class Player extends SpriteComponent with HasGameRef<SurvivorsGame>, CollisionCa
       repeat: true,
     );
     interval.start();
+
+    moveJoystick = JoystickComponent(
+      knob: CircleComponent(radius: 7, paint: Paint()..color = Colors.blueGrey),
+      background: CircleComponent(radius: 20, paint: Paint()..color = Colors.lightBlue),
+      margin: const EdgeInsets.only(left: -200, bottom: 140),
+    );
+
+    fireJoystick = JoystickComponent(
+      knob: CircleComponent(radius: 7, paint: Paint()..color = Colors.blueGrey),
+      background: CircleComponent(radius: 20, paint: Paint()..color = Colors.lightBlue),
+      margin: const EdgeInsets.only(left: 180, bottom: 140),
+    );
+
+    add(moveJoystick);
+    add(fireJoystick);
   }
 
   void move(Vector2 delta) {
@@ -60,8 +79,24 @@ class Player extends SpriteComponent with HasGameRef<SurvivorsGame>, CollisionCa
   void update(double dt) {
     super.update(dt);
     interval.update(dt);
+
+    if (!moveJoystick.delta.isZero()) {
+      playerVelocity = moveJoystick.delta.normalized();
+    }
+    else{
+      playerVelocity = Vector2.zero();
+    }
+
+    if (!fireJoystick.delta.isZero()){
+      shootingDirection = fireJoystick.delta.normalized();
+    }
+    else
+      shootingDirection = Vector2(-1, 0);
+
     final deltaPosition = playerVelocity * (speed * moveSpeedModifier * dt);
     position.add(deltaPosition);
+
+
   }
 
   @override
@@ -115,6 +150,8 @@ class Player extends SpriteComponent with HasGameRef<SurvivorsGame>, CollisionCa
       return super.onKeyEvent(event, keysPressed);
     }
   }
+
+
 
   void reloadTimer() {
     interval = Timer(

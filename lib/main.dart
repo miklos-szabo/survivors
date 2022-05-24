@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class SurvivorsGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerComponents {
+class SurvivorsGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerComponents, HasDraggables {
   late Player player;
   late Spawner spawner;
 
