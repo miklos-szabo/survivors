@@ -6,18 +6,25 @@ import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hw_survivors/ScorePage.dart';
 import 'package:hw_survivors/game/bullet.dart';
 import 'package:hw_survivors/game/enemy.dart';
 import 'package:hw_survivors/game/experience.dart';
 import 'package:hw_survivors/game/spawner.dart';
 import 'package:hw_survivors/mainMenuPage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 import 'game/player.dart';
 import 'game/map.dart';
 import 'gameOverPage.dart';
 import 'levelUpPage.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
@@ -31,6 +38,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "/": (context) => overlayBuilder(),
+        "/scores": (context) => ScorePage(),
         //"/game": (context) => MyHomePage(title: "asd"),
       },
     );

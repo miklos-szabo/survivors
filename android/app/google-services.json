@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1095615507835",
+    "project_id": "flutter-survivors",
+    "storage_bucket": "flutter-survivors.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095615507835:android:377b98daa5f4613222a1de",
+        "android_client_info": {
+          "package_name": "com.ee96xy.hw_survivors"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095615507835-4305q498gqehoiebtr67o8jist2afhtu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1W7BgC8YmiDgvCL_WmSpYz2znCS1nung"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095615507835-4305q498gqehoiebtr67o8jist2afhtu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
