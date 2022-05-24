@@ -50,20 +50,13 @@ class SurvivorsGame extends FlameGame with HasCollisionDetection, HasKeyboardHan
     camera.speed = 1;
     camera.followComponent(player, worldBounds: Map.bounds);
 
-
-    log("Game onload");
-
     return null;
   }
 
   void restartGame(){
-    log("${children.length}");
     for (var element in children) {
-      log(element.runtimeType.toString());
       if(element is Experience || element is Enemy || element is Player || element is Spawner || element is Bullet){
         element.removeFromParent();
-        if(element is Player)
-          log("Player removed");
       }
     }
 
@@ -72,8 +65,6 @@ class SurvivorsGame extends FlameGame with HasCollisionDetection, HasKeyboardHan
     camera.followComponent(player, worldBounds: Map.bounds);
     add(player);
     add(spawner);
-
-    log("restarted");
 
     if (overlays.isActive('MainMenu')) {
       overlays.remove('MainMenu');
@@ -96,6 +87,7 @@ class SurvivorsGame extends FlameGame with HasCollisionDetection, HasKeyboardHan
   }
 
   void ShowLevelUpscreen(){
+    paused = true;
     overlays.add('LevelUp');
   }
 
@@ -103,6 +95,24 @@ class SurvivorsGame extends FlameGame with HasCollisionDetection, HasKeyboardHan
     if (overlays.isActive('LevelUp')) {
       overlays.remove('LevelUp');
     }
+    paused = false;
+  }
+
+  void increaseDamage(){
+    player.damageModifier += 0.2;
+  }
+
+  void increaseMoveSpeed(){
+    player.moveSpeedModifier += 0.2;
+  }
+
+  void increaseProjectileSpeed(){
+    player.projectileSpeedModifier += 0.2;
+  }
+
+  void increaseFireRate(){
+    player.fireRateModifier += 0.2;
+    player.reloadTimer();
   }
 }
 

@@ -6,8 +6,8 @@ import 'package:hw_survivors/game/player.dart';
 import 'package:hw_survivors/main.dart';
 
 class Enemy extends SpriteComponent with HasGameRef<SurvivorsGame>, CollisionCallbacks{
-  int health = 5;
-  int speed = 100;
+  double health = 3.2;
+  int speed = 60;
   late Vector2 pos;
 
   Enemy(Vector2 coords){
@@ -31,7 +31,7 @@ class Enemy extends SpriteComponent with HasGameRef<SurvivorsGame>, CollisionCal
     super.onCollision(points, other);
     if (other is Bullet) {
       other.removeFromParent();
-      health -= other.damage;
+      health -= (other.damage * gameRef.player.damageModifier);
       if(health <= 0) {
         removeFromParent();
         gameRef.player.score++;

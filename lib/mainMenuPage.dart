@@ -14,6 +14,9 @@ Widget MainMenuBuilder(BuildContext buildContext, SurvivorsGame game) {
             fontSize: 32,
             ),
           ),
+          Container(
+            height: 20,
+          ),
           ElevatedButton(
               onPressed: (){ game.restartGame(); },
               child: Text("Play"))

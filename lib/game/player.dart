@@ -16,9 +16,14 @@ class Player extends SpriteComponent with HasGameRef<SurvivorsGame>, CollisionCa
   static const double speed = 150;
   final Vector2 playerVelocity = Vector2.zero();
   Vector2 shootingDirection = Vector2(-1, 0);
-  double shotDelay = 500;
+  double shotDelay = 0.5;
   int xp = 0;
+  int level = 1;
   int score = 0;
+  double damageModifier = 1;
+  double moveSpeedModifier = 1;
+  double projectileSpeedModifier = 1;
+  double fireRateModifier = 1;
 
   late Timer interval;
 
@@ -32,15 +37,14 @@ class Player extends SpriteComponent with HasGameRef<SurvivorsGame>, CollisionCa
     anchor = Anchor.center;
 
     add(RectangleHitbox());
-
-      interval = Timer(
-        0.4,
-        onTick: () => {
-          shootBullet()
-        },
-        repeat: true,
-      );
-      interval.start();
+    interval = Timer(
+      shotDelay / fireRateModifier,
+      onTick: () => {
+        shootBullet()
+      },
+      repeat: true,
+    );
+    interval.start();
   }
 
   void move(Vector2 delta) {
@@ -56,7 +60,7 @@ class Player extends SpriteComponent with HasGameRef<SurvivorsGame>, CollisionCa
   void update(double dt) {
     super.update(dt);
     interval.update(dt);
-    final deltaPosition = playerVelocity * (speed * dt);
+    final deltaPosition = playerVelocity * (speed * moveSpeedModifier * dt);
     position.add(deltaPosition);
   }
 
@@ -109,6 +113,26 @@ class Player extends SpriteComponent with HasGameRef<SurvivorsGame>, CollisionCa
       return false;
     } else {
       return super.onKeyEvent(event, keysPressed);
+    }
+  }
+
+  void reloadTimer() {
+    interval = Timer(
+      shotDelay / fireRateModifier,
+      onTick: () => {
+        shootBullet()
+      },
+      repeat: true,
+    );
+    interval.start();
+  }
+
+  void incrementXp(){
+    xp++;
+    if(xp >= 3){
+      level++;
+      xp = 0;
+      gameRef.ShowLevelUpscreen();
     }
   }
 }

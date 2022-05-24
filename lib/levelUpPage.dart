@@ -6,17 +6,22 @@ Widget LevelUpBuilder(BuildContext buildContext, SurvivorsGame game) {
     child: Container(
       width: 400,
       height: 200,
+      color: Colors.brown,
       padding: EdgeInsets.all(10),
       child: Column(
         children: [
-          Text("Survivor", style: TextStyle(
-            color: Colors.black,
-            fontSize: 32,
-          ),
-          ),
           ElevatedButton(
-              onPressed: (){ game.restartGame(); },
-              child: Text("Play"))
+              onPressed: (){ game.increaseDamage(); game.closeLevelUpScreen();},
+              child: const Text("Damage +20%")),
+          ElevatedButton(
+              onPressed: (){ game.increaseFireRate(); game.closeLevelUpScreen();},
+              child: const Text("Fire rate +20%")),
+          ElevatedButton(
+              onPressed: (){ game.increaseMoveSpeed(); game.closeLevelUpScreen();},
+              child: const Text("Move speed +20%")),
+          ElevatedButton(
+              onPressed: (){ game.increaseProjectileSpeed(); game.closeLevelUpScreen();},
+              child: const Text("Projectile speed +20%"))
         ],
       ),
     ),

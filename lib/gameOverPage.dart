@@ -6,17 +6,35 @@ Widget GameOverBuilder(BuildContext buildContext, SurvivorsGame game) {
     child: Container(
       width: 400,
       height: 200,
+      color: Colors.orange,
       padding: EdgeInsets.all(10),
       child: Column(
         children: [
-          Text("Survivor", style: TextStyle(
+          Text("Game over!", style: TextStyle(
             color: Colors.black,
-            fontSize: 32,
+            fontSize: 60,
           ),
           ),
-          ElevatedButton(
-              onPressed: (){ game.restartGame(); },
-              child: Text("Play"))
+          Container(
+            height: 40,
+          ),
+          Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      onPressed: (){ game.restartGame(); },
+                      child: Text("Restart")),
+                  Container(
+                    width: 5,
+                  ),
+                  ElevatedButton(
+                      onPressed: (){ game.restartGame(); },
+                      child: Text("High scores"))],
+              )
+          )
+
+
         ],
       ),
     ),

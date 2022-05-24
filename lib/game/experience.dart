@@ -19,7 +19,7 @@ class Experience extends SpriteComponent with HasGameRef<SurvivorsGame>, Collisi
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if(other is Player){
-      other.xp++;
+      other.incrementXp();
       removeFromParent();
     }
   }

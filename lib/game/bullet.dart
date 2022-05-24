@@ -43,7 +43,7 @@ class Bullet extends SpriteComponent with HasGameRef<SurvivorsGame>, CollisionCa
   void update(double dt) {
     super.update(dt);
     countdown.update(dt);
-    final deltaPosition = velocity * (speed * dt);
+    final deltaPosition = velocity * (speed * gameRef.player.projectileSpeedModifier * dt);
     position.add(deltaPosition);
   }
 }
