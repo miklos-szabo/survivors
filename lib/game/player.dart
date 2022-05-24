@@ -83,15 +83,9 @@ class Player extends SpriteComponent with HasGameRef<SurvivorsGame>, CollisionCa
     if (!moveJoystick.delta.isZero()) {
       playerVelocity = moveJoystick.delta.normalized();
     }
-    else{
-      playerVelocity = Vector2.zero();
-    }
-
     if (!fireJoystick.delta.isZero()){
       shootingDirection = fireJoystick.delta.normalized();
     }
-    else
-      shootingDirection = Vector2(-1, 0);
 
     final deltaPosition = playerVelocity * (speed * moveSpeedModifier * dt);
     position.add(deltaPosition);

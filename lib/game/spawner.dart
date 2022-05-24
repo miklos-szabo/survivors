@@ -25,10 +25,10 @@ class Spawner extends Component with HasGameRef<SurvivorsGame>{
     var y = currentPos.y - 250 + random.nextInt(500);
     if((currentPos.x - x).abs() < 250 && (currentPos.y - y).abs() < 200){
       if(random.nextInt(1) > 0){
-        y += 200;
+        y += 500;
       }
       else{
-        y -= 200;
+        y -= 500;
       }
     }
     

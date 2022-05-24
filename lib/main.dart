@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:flutter/services.dart';
 
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
@@ -42,6 +43,11 @@ class SurvivorsGame extends FlameGame with HasCollisionDetection, HasKeyboardHan
 
   @override
   Future<void>? onLoad() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+
     player = Player();
     spawner = Spawner();
 
