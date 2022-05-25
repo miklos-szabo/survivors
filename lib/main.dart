@@ -13,6 +13,7 @@ import 'package:hw_survivors/game/experience.dart';
 import 'package:hw_survivors/game/spawner.dart';
 import 'package:hw_survivors/mainMenuPage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 import 'game/player.dart';
@@ -38,7 +39,10 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "/": (context) => overlayBuilder(),
-        "/scores": (context) => ScorePage(),
+        "/scores": (context) => ChangeNotifierProvider(
+            create: (_) => SumScoreState(),
+            child: ScorePage(),
+        ),
         //"/game": (context) => MyHomePage(title: "asd"),
       },
     );

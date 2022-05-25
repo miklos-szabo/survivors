@@ -24,7 +24,7 @@ Widget GameOverBuilder(BuildContext buildContext, SurvivorsGame game) {
           ),
           ),
           Container(
-            height: 30,
+            height: 10,
           ),
           Center(
               child: Row(
